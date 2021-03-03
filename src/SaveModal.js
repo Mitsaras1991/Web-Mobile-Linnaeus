@@ -29,18 +29,7 @@ class SaveModal extends Component {
     const {modalVisible} = this.state;
     return (
       <View style={styles.centeredView}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onDismiss={() => {
-            this.setModalVisible(false);
-            return Alert('Modal has been closed.');
-          }}
-          onRequestClose={() => {
-            //this.setModalVisible(false);
-            Alert('Modal has been closed.');
-          }}>
+        <Modal animationType="fade" transparent={true} visible={modalVisible}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{this.props.typeText}</Text>
@@ -54,7 +43,6 @@ class SaveModal extends Component {
                 onPress={() => {
                   this.setModalVisible(false);
                   this.props.uploadFunc(this.state.desc);
-
                 }}>
                 <Text style={styles.textStyle}>Save</Text>
               </TouchableHighlight>

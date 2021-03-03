@@ -32,6 +32,11 @@ class UserStorage extends React.Component {
       await this.getData();
     }, 5000);
   };
+  componentDidMount() {
+    setTimeout(async () => {
+      await this.getData();
+    }, 5000);
+  }
 
   getData = async () => {
     console.log('Read data');
@@ -99,35 +104,41 @@ const StorageItem = ({item, separators}) => {
       .catch((e) => console.log(e));
   };
   return (
-    <View
-      style={{
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderWidth: 1,
-        borderColor: 'red',
-      }}>
-      <Image
-        style={{
-          width: 200,
-          height: 200,
+      <MyContext.Consumer>{(value)=>{
+          token=value.tokens
+          return(
+              <View
+                  style={{
+                      padding: 20,
+                      marginVertical: 8,
+                      marginHorizontal: 16,
+                      borderWidth: 1,
+                      borderColor: 'red',
+                  }}>
+                  <Image
+                      style={{
+                          width: 200,
+                          height: 200,
 
-          alignItems: 'center',
-        }}
-        source={{uri: base64Icon}}
-      />
-      <View>
-        <Text>Lat: {item.lat}</Text>
-        <Text>Long: {item.long}</Text>
-        <Text>TimeStamp: {item.timeStamp}</Text>
-        <Text>Description: {item.description}</Text>
-        <SaveModal
-          typeText="Google Drive"
-          iconType="cloud-upload-outline"
-          uploadFunc={upLoad}
-        />
-      </View>
-    </View>
+                          alignItems: 'center',
+                      }}
+                      source={{uri: base64Icon}}
+                  />
+                  <View>
+                      <Text>Lat: {item.lat}</Text>
+                      <Text>Long: {item.long}</Text>
+                      <Text>TimeStamp: {item.timeStamp}</Text>
+                      <Text>Description: {item.description}</Text>
+                      <SaveModal
+                          typeText="Google Drive"
+                          iconType="cloud-upload-outline"
+                          uploadFunc={upLoad}
+                      />
+                  </View>
+              </View>
+          )
+      }}</MyContext.Consumer>
+
   );
 };
 export default UserStorage;
